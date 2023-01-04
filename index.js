@@ -11,12 +11,9 @@ const FACEBOOK_PAGE_ACCESS_TOKEN = '_______________________________';
 // Accept JSON POST body
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-    res.send("hello")
-})
 
 // GET /webhook
-app.get('/webhook', (req, res) => {
+app.get('/webhooks', (req, res) => {
     // Facebook sends a GET request
     // To verify that the webhook is set up
     // properly, by sending a special challenge that
@@ -28,7 +25,7 @@ app.get('/webhook', (req, res) => {
 })
 
 // POST /webhook
-app.post('/webhook', async (req, res) => {
+app.post('/webhooks', async (req, res) => {
     // Facebook will be sending an object called "entry" for "leadgen" webhook event
     if (!req.body.entry) {
         return res.status(500).send({ error: 'Invalid POST data received' });
