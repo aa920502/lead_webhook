@@ -37,8 +37,9 @@ app.post('/webhook', async (req, res) => {
     // Travere entries & changes and process lead IDs
     for (const entry of req.body.entry) {
         for (const change of entry.changes) {
+            console.log("received lead ID: " + change.value.leadgen_id);
             // Process new lead (leadgen_id)
-            await processNewLead(change.value.leadgen_id);
+            // await processNewLead(change.value.leadgen_id);
         }
     }
 
@@ -46,7 +47,7 @@ app.post('/webhook', async (req, res) => {
     res.send({ success: true });
 })
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 });
 
